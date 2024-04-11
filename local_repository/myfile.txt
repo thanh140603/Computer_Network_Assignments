@@ -1,0 +1,36 @@
+#define INIT 1
+#define LED_ON
+#define LED_OFF
+
+int status = INIT;
+void led_fsm(){
+switch(status){
+ case INIT:
+	break;
+ case LED_ON:
+
+	if(timer_flag == 1){
+		status = LED_OFF;
+		setTimer(T_off);
+		led_off();		
+	} 
+	break;
+
+ case LED_OFF:
+
+	if(timer_flag == 1){
+		status = LED_ON;
+		setTimer(T_on);
+		led_on();
+	} 
+	break;
+ default:
+ 	break;
+}
+}
+
+void main(){
+while(1){
+	led_fsm();
+}
+}
